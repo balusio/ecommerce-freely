@@ -6,7 +6,7 @@ const { Router } = require("express");
 const productsRouter = Router();
 const productController = new ProductController();
 
-productsRouter.get("/", productController.get);
+productsRouter.get("/", productController.getAll);
 productsRouter.get("/:id", productController.get);
 
 productsRouter.put("/", productController.put);

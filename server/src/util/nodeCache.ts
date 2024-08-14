@@ -39,7 +39,7 @@ class CacheInstance {
 
   setMultipleCache(params: CacheParams[]) {}
 
-  updateCache(key: string, callback: (val: any) => any) {
+  updateCache(key: string, callback: (val: any) => any): any {
     if (this.cache.has(key)) {
       const value = this.cache.take(key);
       const updatedValue = callback(value);
@@ -47,6 +47,8 @@ class CacheInstance {
         key,
         val: updatedValue,
       });
+
+      return this.getCache(key);
     } else {
       console.error(`Error, object ${key}, doesn't exists`);
     }
@@ -55,7 +57,7 @@ class CacheInstance {
   deleteCache(key: string): boolean {
     this.cache.del(key);
 
-    return false;
+    return this.cache.has(key);
   }
 }
 
