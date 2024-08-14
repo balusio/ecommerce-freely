@@ -43,8 +43,8 @@ class ProductController extends CrudGen {
     if (newProduct) {
       res.json(newProduct);
     } else {
-      res.json({ message: "error, product not saved" });
       res.status(500);
+      res.json({ message: "error, product not saved" });
     }
   }
 }

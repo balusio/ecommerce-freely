@@ -18,7 +18,6 @@ class ProductModel {
     this.getProduct = this.getProduct.bind(this);
   }
   getAllProducts() {
-    console.log("inside model");
     return cache.getCache("products");
   }
 
@@ -29,8 +28,6 @@ class ProductModel {
       if (product.length) {
         return product[0];
       }
-
-      return undefined;
     }
 
     return undefined;
@@ -38,17 +35,33 @@ class ProductModel {
 
   addProduct(product: Omit<Product, "id">): Product | undefined {
     let latestID;
-    const valuesUpdated = cache.updateCache("products", (values) => {
-      latestID = values[values.length - 1].id + 1;
 
-      return [...values, { id: latestID, ...product }];
-    });
+    if (cache.hasCache("products")) {
+      const valuesUpdated = cache.updateCache("products", (values) => {
+        latestID = values[values.length - 1].id + 1;
 
-    if (latestID) {
+        return [...values, { id: latestID, ...product }];
+      });
+
+      if (latestID) {
+        return this.getProduct(latestID);
+      }
+
+      return undefined;
+    } else {
+      latestID = 0;
+      cache.setCache({
+        key: "products",
+        val: [
+          {
+            id: 0,
+            ...product,
+          },
+        ],
+      });
+
       return this.getProduct(latestID);
     }
-
-    return undefined;
   }
 
   updateProduct(product: Product): Products[] {
