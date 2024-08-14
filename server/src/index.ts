@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import router from "./routes";
 import CacheInstance from "./util/nodeCache";
 import seedDB from "./util/seedDB";
+import helmet from "helmet";
+import cors from "cors";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,6 +14,13 @@ process.argv.forEach(function (val, index, array) {
     seedDB();
   }
 });
+app.use(cors());
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+  })
+);
+
 app.use(express.json());
 app.use("/", router);
 
