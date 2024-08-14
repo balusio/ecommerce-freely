@@ -4,21 +4,40 @@ import ProductModel, { Product } from "./products.model";
 const cache = CacheInstance.getInstance();
 
 class ProductsService {
-  productModel: ProductModel;
+  private productModel: ProductModel;
 
   constructor() {
     this.productModel = new ProductModel();
+    this.getAllProducts = this.getAllProducts.bind(this);
+    this.getProduct = this.getProduct.bind(this);
   }
 
-  public static getAllProducts(): Product[] {
-    const products = cache.getCache("products");
+  getAllProducts(): Product[] {
+    const products = this.productModel.getAllProducts();
     return products;
   }
 
-  public static getProduct(id: number): Product | undefined {
-    const product = ProductModel.getProduct(id);
+  getProduct(id: number): Product | undefined {
+    return this.productModel.getProduct(id);
+  }
 
-    return product;
+  addProduct(product: Record<any, any>): Product | undefined {
+    try {
+      const incomingProduct: Omit<Product, "id"> = {
+        title: product.title,
+        price: product.price,
+        category: product.category,
+        description: product.description,
+        image: product.image,
+      };
+
+      const latesProduct = this.productModel.addProduct(incomingProduct);
+
+      return latesProduct;
+    } catch (e) {
+      console.error(e);
+      return undefined;
+    }
   }
 }
 

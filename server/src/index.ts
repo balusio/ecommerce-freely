@@ -12,7 +12,7 @@ process.argv.forEach(function (val, index, array) {
     seedDB();
   }
 });
-
+app.use(express.json());
 app.use("/", router);
 
 app.listen(port, () => {

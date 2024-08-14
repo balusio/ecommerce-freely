@@ -12,22 +12,46 @@ type Product = {
 type Products = Product[];
 
 const cache = CacheInstance.getInstance();
+
 class ProductModel {
-  public static getProduct(id: number): Product | undefined {
-    const products = cache.getCache("products");
-    const product = products.filter((product: Product) => product.id === id);
-
-    return product;
+  constructor() {
+    this.getProduct = this.getProduct.bind(this);
+  }
+  getAllProducts() {
+    console.log("inside model");
+    return cache.getCache("products");
   }
 
-  public static addProduct(product: Product): Products[] {
+  getProduct(id: number): Product | undefined {
+    if (cache.hasCache("products")) {
+      const products = cache.getCache("products");
+      const product = products.filter((product: Product) => product.id === id);
+      if (product.length) {
+        return product[0];
+      }
+
+      return undefined;
+    }
+
+    return undefined;
+  }
+
+  addProduct(product: Omit<Product, "id">): Product | undefined {
+    let latestID;
     const valuesUpdated = cache.updateCache("products", (values) => {
-      return [...values, product];
+      latestID = values[values.length - 1].id + 1;
+
+      return [...values, { id: latestID, ...product }];
     });
-    return valuesUpdated;
+
+    if (latestID) {
+      return this.getProduct(latestID);
+    }
+
+    return undefined;
   }
 
-  public static updateProduct(product: Product): Products[] {
+  updateProduct(product: Product): Products[] {
     const valuesUpdated = cache.updateCache("products", (values) => {
       return values.map((cachedProduct: Product) => {
         if (cachedProduct.id === product.id) {

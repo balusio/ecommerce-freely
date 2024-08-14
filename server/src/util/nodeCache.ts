@@ -51,12 +51,16 @@ class CacheInstance {
       return this.getCache(key);
     } else {
       console.error(`Error, object ${key}, doesn't exists`);
+      throw new Error("could not create product");
     }
   }
 
   deleteCache(key: string): boolean {
     this.cache.del(key);
+    return !this.cache.has(key);
+  }
 
+  hasCache(key: string): boolean {
     return this.cache.has(key);
   }
 }
