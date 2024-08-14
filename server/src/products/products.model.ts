@@ -50,3 +50,6 @@ class ProductModel {
     return false;
   }
 }
+
+export default ProductModel;
+export type { Product };
