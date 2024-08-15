@@ -1,81 +1,50 @@
-import { Form } from "react-router-dom";
+import { useState } from "react";
+import { StarIcon } from "@heroicons/react/20/solid";
+import { Radio, RadioGroup } from "@headlessui/react";
+import { useLoaderData } from "react-router-dom";
+import ButtonComponent from "./Button";
+import ProductCard from "./ProductCard";
+import RelatedProducts from "./RelatedProducts";
+
+export async function loader({ params }: any) {
+  const response = await fetch(
+    `http://localhost:3000/products/${params.productId}`,
+  );
+  const product = await response.json();
+
+  return { product };
+}
 
 export default function Product() {
-  const contact = {
-    first: "Your",
-    last: "Name",
-    avatar: "https://robohash.org/you.png?size=200x200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  };
+  const { product } = useLoaderData() as any;
 
   return (
-    <div id="contact">
-      <div>
-        <img
-          key={contact.avatar}
-          src={
-            contact.avatar ||
-            `https://robohash.org/${contact.id}.png?size=200x200`
-          }
-        />
-      </div>
+    <div className="bg-white p-4 lg:p-0">
+      <div className="pt-6">
+        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+          <div className="col-span-2 w-full overflow-hidden rounded-lg lg:block">
+            <img
+              alt={product.title}
+              src={product.image}
+              className="m-auto h-auto w-full max-w-[300px] object-cover object-center"
+            />
+            <RelatedProducts category={product.category} />
+          </div>
+          <div className="text-start lg:border-l lg:border-gray-200 lg:pl-8">
+            <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-xl">
+              {product.title}
+            </h1>
+            <p className="my-5 text-3xl tracking-tight text-gray-900">
+              $ {product.price}
+            </p>
+            <div className="my-8 space-y-6">
+              <p className="text-base text-gray-900">{product.description}</p>
+            </div>
 
-      <div>
-        <h1>
-          {contact.first || contact.last ? (
-            <>
-              {contact.first} {contact.last}
-            </>
-          ) : (
-            <i>No Name</i>
-          )}{" "}
-          <Favorite contact={contact} />
-        </h1>
-
-        {contact.twitter && (
-          <p>
-            <a target="_blank" href={`https://twitter.com/${contact.twitter}`}>
-              {contact.twitter}
-            </a>
-          </p>
-        )}
-
-        {contact.notes && <p>{contact.notes}</p>}
-
-        <div>
-          <Form action="edit">
-            <button type="submit">Edit</button>
-          </Form>
-          <Form
-            method="post"
-            action="destroy"
-            onSubmit={(event) => {
-              if (!confirm("Please confirm you want to delete this record.")) {
-                event.preventDefault();
-              }
-            }}
-          >
-            <button type="submit">Delete</button>
-          </Form>
+            <ButtonComponent variant="primary">purchase</ButtonComponent>
+          </div>
         </div>
       </div>
     </div>
-  );
-}
-
-function Favorite({ contact }) {
-  const favorite = contact.favorite;
-  return (
-    <Form method="post">
-      <button
-        name="favorite"
-        value={favorite ? "false" : "true"}
-        aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
-      >
-        {favorite ? "★" : "☆"}
-      </button>
-    </Form>
   );
 }

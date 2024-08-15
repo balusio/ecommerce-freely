@@ -15,7 +15,7 @@ export default function ProductCard(props: ProductCardProps) {
 
   return (
     <Link
-      to={`products/${id}`}
+      to={`/products/${id}`}
       key={id}
       className="group rounded-md shadow-md transition ease-in-out hover:scale-105"
     >

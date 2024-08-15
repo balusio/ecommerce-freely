@@ -3,7 +3,7 @@ import "./App.css";
 
 import Root from "./Root";
 import ErrorComponent from "./components/Error";
-import Product from "./components/Product";
+import Product, { loader as productLoader } from "./components/Product";
 import ProductList, {
   loader as productsLoader,
 } from "./components/ProductList";
@@ -21,8 +21,9 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "product/:productId",
+        path: "products/:productId",
         element: <Product />,
+        loader: productLoader,
       },
     ],
   },

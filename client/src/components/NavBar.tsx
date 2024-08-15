@@ -8,6 +8,7 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -42,11 +43,13 @@ export default function Navbar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
-              <img
-                alt="Give Freely"
-                src="https://app.givefreely.com/_next/image?url=%2Flogo.png&w=256&q=75"
-                className="h-8 w-auto"
-              />
+              <Link to="/">
+                <img
+                  alt="Give Freely"
+                  src="https://app.givefreely.com/_next/image?url=%2Flogo.png&w=256&q=75"
+                  className="h-8 w-auto"
+                />
+              </Link>
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4"></div>
