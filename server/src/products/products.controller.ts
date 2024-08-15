@@ -1,6 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import CrudGen from "../util/CrudGen";
 import ProductsService from "./products.service";
+import { Product } from "./products.model";
+import { QuerySearchObject } from "../types";
 
 class ProductController extends CrudGen {
   private productService: ProductsService;
@@ -16,7 +18,9 @@ class ProductController extends CrudGen {
   }
 
   getAll(req: Request, res: Response, next: NextFunction): void {
-    const products = this.productService.getAllProducts();
+    const products = this.productService.getAllProducts(
+      req.query as QuerySearchObject
+    );
     if (products) {
       res.json(products);
       res.status(200);

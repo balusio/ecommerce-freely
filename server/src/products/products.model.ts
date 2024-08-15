@@ -1,15 +1,5 @@
+import { Product, Products } from "../types";
 import CacheInstance from "../util/nodeCache";
-
-type Product = {
-  id: number;
-  title: string;
-  price: number;
-  category: string;
-  description: string;
-  image: string;
-};
-
-type Products = Product[];
 
 const cache = CacheInstance.getInstance();
 
@@ -64,7 +54,7 @@ class ProductModel {
     }
   }
 
-  updateProduct(product: Product): Products[] {
+  updateProduct(product: Product): Products {
     const valuesUpdated = cache.updateCache("products", (values) => {
       return values.map((cachedProduct: Product) => {
         if (cachedProduct.id === product.id) {

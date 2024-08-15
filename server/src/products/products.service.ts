@@ -1,5 +1,6 @@
+import { Product, QuerySearchObject } from "../types";
 import CacheInstance from "../util/nodeCache";
-import ProductModel, { Product } from "./products.model";
+import ProductModel from "./products.model";
 
 const cache = CacheInstance.getInstance();
 
@@ -12,9 +13,45 @@ class ProductsService {
     this.getProduct = this.getProduct.bind(this);
   }
 
-  getAllProducts(): Product[] {
+  getAllProducts(query: QuerySearchObject): Product[] {
     const products = this.productModel.getAllProducts();
-    return products;
+    const isEmptySearchQuery = Object.keys(query).length === 0;
+    if (isEmptySearchQuery) {
+      return products;
+    } else {
+      // limit the product length that will return
+      const filteredProducts = query["limit"]
+        ? products.slice(0, parseInt(query["limit"]))
+        : [...products];
+
+      return filteredProducts.filter((product: Product) => {
+        for (const property in query) {
+          switch (property) {
+            case "title":
+              console.log(
+                `per product inside word ${query[property]}: `,
+                product.title.toLowerCase()
+              );
+              console.log(
+                "title to search if includes",
+                product.title.toLowerCase().includes(query[property])
+              );
+              return product.title.toLowerCase().includes(query[property]);
+
+            case "category":
+              return product.category === query[property];
+            case "id":
+              return product.id === parseInt(query[property]);
+
+            case "price":
+              return product.price === parseInt(query[property]);
+
+            default:
+              return true;
+          }
+        }
+      });
+    }
   }
 
   getProduct(id: number): Product | undefined {
