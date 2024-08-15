@@ -28,7 +28,7 @@ export default function RelatedProducts({ category }: RelatedProductsProps) {
       <div className="mx-auto my-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
         {relatedProducts.length ? (
           relatedProducts.map((product: Product) => (
-            <ProductCard {...product} />
+            <ProductCard {...product} key={product.id} />
           ))
         ) : (
           <p className="my-5 text-start text-lg text-gray-900">
