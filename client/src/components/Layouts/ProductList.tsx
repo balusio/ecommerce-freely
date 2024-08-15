@@ -20,7 +20,7 @@ const searchProduct = async (param: string): Promise<Product[] | null> => {
 export async function loader() {
   try {
     const response = await fetch("http://localhost:3000/products");
-    console.log(response.status);
+
     const products = await response.json();
 
     return { products };
@@ -32,13 +32,13 @@ export async function loader() {
 }
 
 export default function ProductList() {
-  const data = useLoaderData() as any;
-
-  if (!data) return null;
+  const data = useLoaderData() as {
+    products: Product[];
+  };
 
   const { products = [] } = data;
   const [filteredProducts, setFilteredProducts] = useState(() => products);
-  const productList = useRef(null);
+  const productList = useRef<Product[] | null>(null);
 
   useEffect(() => {
     if (products.length) {
@@ -55,9 +55,13 @@ export default function ProductList() {
       }
     } else {
       // if clear the search, get the default query list
-      setFilteredProducts(productList.current);
+      if (productList.current) {
+        setFilteredProducts(productList.current);
+      }
     }
   }, []);
+
+  if (!data) return null;
 
   return (
     <>

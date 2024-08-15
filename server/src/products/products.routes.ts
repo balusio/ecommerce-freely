@@ -2,7 +2,7 @@ import ProductController from "./products.controller";
 
 const { Router } = require("express");
 
-// Handles requests made to /api/products
+// Handles requests made to /products
 const productsRouter = Router();
 const productController = new ProductController();
 

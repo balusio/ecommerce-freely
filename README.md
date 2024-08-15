@@ -50,3 +50,10 @@ transpile ts to JS
 will serve the JS `dist/` folder
 
 ## Initialize Client:
+
+if you want to run independently the client go to the client folder and install dependencies
+
+`cd ./client && npm install`
+
+to run dev server :
+`npm run dev`

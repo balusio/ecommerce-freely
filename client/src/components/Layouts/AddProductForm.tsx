@@ -1,11 +1,9 @@
-import { Description, Field, Label } from "@headlessui/react";
 import Input from "../FormInput";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import ButtonComponent from "../Button";
 import PageTitle from "../PageTitle";
 import { API_URL } from "../../utils";
 import { useRef, useState } from "react";
-import { redirect } from "react-router-dom";
 
 interface IFormInput {
   title: string;

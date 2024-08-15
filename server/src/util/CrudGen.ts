@@ -7,6 +7,9 @@ interface CrudGenInterface {
   delete(req: Request, res: Response, next: NextFunction): void;
 }
 
+/**
+ * General API class to handle CRUD operations on controllers
+ */
 class CrudGen implements CrudGenInterface {
   constructor() {
     this.get = this.get.bind(this);

@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import CrudGen from "../util/CrudGen";
 import ProductsService from "./products.service";
-import { Product } from "./products.model";
 import { QuerySearchObject } from "../types";
 
 class ProductController extends CrudGen {
@@ -11,10 +10,6 @@ class ProductController extends CrudGen {
     super();
     this.productService = new ProductsService();
     this.getAll = this.getAll.bind(this);
-    this.get = this.get.bind(this);
-    this.put = this.put.bind(this);
-    this.post = this.post.bind(this);
-    this.delete = this.delete.bind(this);
   }
 
   getAll(req: Request, res: Response, next: NextFunction): void {
@@ -42,7 +37,6 @@ class ProductController extends CrudGen {
   }
 
   post(req: Request, res: Response): void {
-    console.log(req.body);
     const newProduct = this.productService.addProduct(req.body);
     if (newProduct) {
       res.json(newProduct);

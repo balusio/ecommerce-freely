@@ -18,7 +18,7 @@ export default function RelatedProducts({ category }: RelatedProductsProps) {
     };
 
     getRelatedProducts();
-  }, []);
+  }, [category]);
 
   return (
     <div className="hidden md:block">

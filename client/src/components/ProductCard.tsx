@@ -10,8 +10,7 @@ type Product = {
   image: string;
 };
 
-interface ProductCardProps extends Product {}
-export default function ProductCard(props: ProductCardProps) {
+export default function ProductCard(props: Product) {
   const { id, title, image, price } = props;
 
   return (

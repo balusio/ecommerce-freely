@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-
 import Root from "./components/Layouts/Root";
 import ErrorComponent from "./components/Error";
 import Product, { loader as productLoader } from "./components/Layouts/Product";
@@ -42,5 +41,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export default router;
-export { ROUTES };
+export { router as default, ROUTES };

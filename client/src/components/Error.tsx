@@ -1,7 +1,7 @@
 import { useRouteError } from "react-router-dom";
 
 export default function ErrorComponent() {
-  const error = useRouteError() as unknown as Record<string, any>;
+  const error = useRouteError() as unknown as Record<string, string | number>;
   console.error(error);
 
   return (

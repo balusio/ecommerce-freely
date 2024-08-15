@@ -1,26 +1,37 @@
-import {
-  Description,
-  Field,
-  Label,
-  Input as HeadlessInput,
-} from "@headlessui/react";
-import { forwardRef } from "react";
+import { Field, Label } from "@headlessui/react";
+import { forwardRef, Ref } from "react";
 import { FieldError } from "react-hook-form";
 
 interface InputProps {
   name: string;
   label: string;
-  onChange: (value: any) => void;
-  value: any;
+  onChange: (value: unknown) => void;
   as?: "input" | "textarea";
   error?: FieldError;
+  className?: string;
 }
 
 const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
-  ({ label, onChange, error, as = "input", ...restProps }: InputProps, ref) => {
+  (props: InputProps, ref) => {
+    const { label, onChange, error, as = "input", ...restProps } = props;
+
     const fieldRequierd = error?.type === "required" || error?.type === "min";
     const errorClasses = fieldRequierd ? "border-red-500" : "";
-    const InputTag = as === "input" ? "input" : "textarea";
+    const InputTag = (props: InputProps) => {
+      if (as === "input") {
+        return <input {...props} ref={ref as Ref<HTMLInputElement>} />;
+      }
+
+      return (
+        <textarea
+          {...restProps}
+          ref={ref as Ref<HTMLTextAreaElement>}
+          className={`${errorClasses} ${asClasses} h-10 w-full border-2 border-gray-300 bg-white px-6 pr-10 text-gray-800 data-[disabled]:bg-gray-100`}
+          onChange={onChange}
+        />
+      );
+    };
+
     const asClasses = as === "textarea" ? "min-h-[120px]" : "";
 
     return (
@@ -29,8 +40,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
           {label}
         </Label>
         <InputTag
+          label={label}
           {...restProps}
-          ref={ref as any}
           className={`${errorClasses} ${asClasses} h-10 w-full border-2 border-gray-300 bg-white px-6 pr-10 text-gray-800 data-[disabled]:bg-gray-100`}
           onChange={onChange}
         />

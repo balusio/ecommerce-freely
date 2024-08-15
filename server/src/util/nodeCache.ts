@@ -8,6 +8,10 @@ type CacheParams = {
 
 const DEFAULT_CACHE_TIME = 1000000;
 
+/**
+ * cache interface to manipulate products from cache-node
+ * @see https://www.npmjs.com/package/node-cache
+ */
 class CacheInstance {
   private static _instance: CacheInstance;
   private cache: any;

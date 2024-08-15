@@ -24,18 +24,11 @@ class ProductsService {
         ? products.slice(0, parseInt(query["limit"]))
         : [...products];
 
+      // if there's some query params filter the products search result
       return filteredProducts.filter((product: Product) => {
         for (const property in query) {
           switch (property) {
             case "title":
-              console.log(
-                `per product inside word ${query[property]}: `,
-                product.title.toLowerCase()
-              );
-              console.log(
-                "title to search if includes",
-                product.title.toLowerCase().includes(query[property])
-              );
               return product.title.toLowerCase().includes(query[property]);
 
             case "category":

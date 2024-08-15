@@ -12,7 +12,7 @@ export default function SearchInput({ onChange }: SearchInputProps) {
 
   useEffect(() => {
     onChange(debouncedValue);
-  }, [debouncedValue]);
+  }, [debouncedValue, onChange]);
   /**
    * debounce input text to trigger the search query event
    */

@@ -39,6 +39,7 @@ class ProductModel {
 
       return undefined;
     } else {
+      // if there's no products create a brand new product with id 0
       latestID = 0;
       cache.setCache({
         key: "products",
@@ -74,7 +75,6 @@ class ProductModel {
     });
 
     return updatedProducts;
-    return false;
   }
 }
 

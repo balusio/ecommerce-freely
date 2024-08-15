@@ -2,6 +2,11 @@ import CacheInstance from "./nodeCache";
 
 const cache = CacheInstance.getInstance();
 
+/**
+ * This is a generic DB seeded from fakestoreapi
+ * @see https://fakestoreapi.com/products
+ * it dependes on node-cache to save the data on memory
+ */
 const seedDB = () => {
   if (cache.hasCache("products")) {
     console.log("---DB ALREADY SEEDED, SKIPING NEW SEED---");

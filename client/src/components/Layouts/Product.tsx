@@ -1,19 +1,21 @@
-import { useLoaderData } from "react-router-dom";
+import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import ButtonComponent from "../Button";
 import RelatedProducts from "../RelatedProducts";
 import PageTitle from "../PageTitle";
+import { API_URL } from "../../utils";
+import { Product as ProductType } from "../ProductCard";
 
-export async function loader({ params }: any) {
-  const response = await fetch(
-    `http://localhost:3000/products/${params.productId}`,
-  );
+export async function loader({ params }: LoaderFunctionArgs) {
+  const response = await fetch(`${API_URL}/products/${params.productId}`);
   const product = await response.json();
 
   return { product };
 }
 
 export default function Product() {
-  const { product = {} } = useLoaderData() as any;
+  const { product = {} as ProductType } = useLoaderData() as {
+    product: ProductType;
+  };
 
   return (
     <>

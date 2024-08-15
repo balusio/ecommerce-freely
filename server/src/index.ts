@@ -8,12 +8,13 @@ import cors from "cors";
 const app = express();
 const port = process.env.PORT || 3000;
 
-process.argv.forEach(function (val, index, array) {
+process.argv.forEach(function (val) {
   if (val === "seedDB") {
     console.log("seed db");
     seedDB();
   }
 });
+
 app.use(cors());
 app.use(
   helmet({
