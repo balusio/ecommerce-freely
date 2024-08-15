@@ -6,6 +6,7 @@ interface ButtonProps {
   children: ReactNode;
   className?: string;
   variant: "primary" | "secondary";
+  type?: HTMLButtonElement["type"];
 }
 
 const defaultClasses = "w-full px-4 py-2 rounded transition-all";
@@ -18,10 +19,15 @@ export default function ButtonComponent({
   children,
   className,
   variant = "primary",
+  type,
 }: ButtonProps) {
   const styleVariants = buttonVariants[variant];
   return (
-    <Button onClick={onClick} className={`${styleVariants} ${className}`}>
+    <Button
+      type={type}
+      onClick={onClick}
+      className={`${styleVariants} ${className}`}
+    >
       {children}
     </Button>
   );

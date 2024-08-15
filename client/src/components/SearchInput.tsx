@@ -1,11 +1,11 @@
 import { Input } from "@headlessui/react";
 import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/outline";
 import { SyntheticEvent, useEffect, useState } from "react";
-import { Product } from "./ProductCard";
 
 interface SearchInputProps {
   onChange: (value: string) => void;
 }
+
 export default function SearchInput({ onChange }: SearchInputProps) {
   const [query, setQuery] = useState("");
   const [debouncedValue, setDebouncedValue] = useState(() => query);
@@ -14,7 +14,7 @@ export default function SearchInput({ onChange }: SearchInputProps) {
     onChange(debouncedValue);
   }, [debouncedValue]);
   /**
-   * debounce query to trigger the search query event
+   * debounce input text to trigger the search query event
    */
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -35,8 +35,8 @@ export default function SearchInput({ onChange }: SearchInputProps) {
         name="search"
         value={query}
         onChange={onInputChange}
-        placeholder="Search Product"
-        className="h-10 w-full bg-white px-6 pr-10 text-gray-800"
+        placeholder="Search Product..."
+        className="h-10 w-full border-2 border-gray-300 bg-white px-6 pr-10 text-gray-800"
       />
       <MagnifyingGlassCircleIcon className="absolute right-2 top-2 size-6 text-gray-300" />
     </div>

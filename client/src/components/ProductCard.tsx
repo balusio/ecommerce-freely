@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ROUTES } from "../Router";
 
 type Product = {
   id: number;
@@ -15,11 +16,11 @@ export default function ProductCard(props: ProductCardProps) {
 
   return (
     <Link
-      to={`/products/${id}`}
+      to={ROUTES.product(id)}
       key={id}
       className="group rounded-md shadow-md transition ease-in-out hover:scale-105"
     >
-      <div className="aspect-h-1 aspect-w-1 xl:aspect-h-8 xl:aspect-w-7 w-full overflow-hidden rounded-lg bg-gray-200">
+      <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
         <img
           alt={title}
           src={image}

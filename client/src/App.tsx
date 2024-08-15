@@ -1,36 +1,9 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import "./App.css";
-
-import Root from "./Root";
-import ErrorComponent from "./components/Error";
-import Product, { loader as productLoader } from "./components/Product";
-import ProductList, {
-  loader as productsLoader,
-} from "./components/ProductList";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorComponent />,
-    children: [
-      {
-        path: "/",
-        element: <ProductList />,
-        loader: productsLoader,
-      },
-
-      {
-        path: "products/:productId",
-        element: <Product />,
-        loader: productLoader,
-      },
-    ],
-  },
-]);
+import Router from "./Router";
 
 function App() {
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={Router} />;
 }
 
 export default App;
