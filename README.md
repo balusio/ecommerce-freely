@@ -51,6 +51,17 @@ will serve the JS `dist/` folder
 
 ## Initialize Client:
 
+### instal env variables:
+
+_NOTE_: all this must be executed at client folder
+
+check the `.env.example` and use the api url of the server to point the client api (check it needs to use the prefix VITE) check more [here](https://vitejs.dev/guide/env-and-mode)
+(localhost:3000 is default example)
+
+```
+VITE_API_URL=http://localhost:3000
+```
+
 if you want to run independently the client go to the client folder and install dependencies
 
 `cd ./client && npm install`
@@ -66,3 +77,7 @@ The application is build with:
 - HeadlessUI/react
 - heroIcons/react
 - vite
+
+## prod mode
+
+`npm run build` command will rund linter, ts build and export the vite build

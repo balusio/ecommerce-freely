@@ -40,11 +40,11 @@ export default function Navbar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
-              <Link to="/">
+              <Link to="/" className="max-w-[120px] md:max-w-[256px]">
                 <img
                   alt="Give Freely"
                   src="https://app.givefreely.com/_next/image?url=%2Flogo.png&w=256&q=75"
-                  className="h-8 w-auto"
+                  className="w-full"
                 />
               </Link>
             </div>

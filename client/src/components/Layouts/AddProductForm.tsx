@@ -10,6 +10,7 @@ interface IFormInput {
   price: number;
   description: string;
   category: string;
+  image: string;
 }
 
 const submitData = async (formData: IFormInput) => {
@@ -46,6 +47,7 @@ export default function AddProduct() {
       price: 0,
       description: "",
       category: "",
+      image: "",
     },
   });
 
@@ -66,8 +68,8 @@ export default function AddProduct() {
 
   return (
     <>
-      <PageTitle>Add New Product</PageTitle>
-      <div className="relative m-auto flex min-h-16 w-full max-w-lg flex-col justify-center gap-4">
+      <div className="relative m-auto flex min-h-16 w-full max-w-lg flex-col justify-center gap-4 p-6 md:p-0">
+        <PageTitle>Add New Product</PageTitle>
         {isSubmitting ? (
           <div
             style={{
@@ -106,6 +108,13 @@ export default function AddProduct() {
                   control={control}
                   render={({ field }) => (
                     <Input label="Title" {...field} error={errors.title} />
+                  )}
+                />
+                <Controller
+                  name="image"
+                  control={control}
+                  render={({ field }) => (
+                    <Input label="Image URL" {...field} error={errors.image} />
                   )}
                 />
                 <Controller

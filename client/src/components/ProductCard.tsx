@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ROUTES } from "../Router";
+import { fallbackImage } from "../utils";
 
 type Product = {
   id: number;
@@ -22,7 +23,7 @@ export default function ProductCard(props: Product) {
       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
         <img
           alt={title}
-          src={image}
+          src={image || fallbackImage}
           className="h-full w-full object-cover object-center group-hover:opacity-75"
         />
       </div>

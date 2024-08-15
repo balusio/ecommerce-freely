@@ -2,7 +2,7 @@ import { LoaderFunctionArgs, useLoaderData } from "react-router-dom";
 import ButtonComponent from "../Button";
 import RelatedProducts from "../RelatedProducts";
 import PageTitle from "../PageTitle";
-import { API_URL } from "../../utils";
+import { API_URL, fallbackImage } from "../../utils";
 import { Product as ProductType } from "../ProductCard";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -26,7 +26,7 @@ export default function Product() {
             <div className="col-span-2 w-full overflow-hidden rounded-lg lg:block">
               <img
                 alt={product.title}
-                src={product.image}
+                src={product.image || fallbackImage}
                 className="m-auto h-auto w-full max-w-[300px] object-cover object-center"
               />
               <RelatedProducts category={product.category} />
