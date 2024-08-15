@@ -1,4 +1,4 @@
-# ecommerce-freely
+# Ecommerce-freely
 
 This Applications is a client/server ecommerce built with:
 
@@ -31,7 +31,7 @@ if everything goes OK you will receive a message like this:
 
 `======== DB SEEDED ========`
 
-## Initialize Server:
+## Server Initialize:
 
 `cd server && npm install`
 
@@ -49,9 +49,9 @@ transpile ts to JS
 
 will serve the JS `dist/` folder
 
-## Initialize Client:
+## Client Initialize :
 
-### instal env variables:
+### install env variables:
 
 _NOTE_: all this must be executed at client folder
 
@@ -78,6 +78,6 @@ The application is build with:
 - heroIcons/react
 - vite
 
-## prod mode
+## Client: Prod mode
 
 `npm run build` command will rund linter, ts build and export the vite build
