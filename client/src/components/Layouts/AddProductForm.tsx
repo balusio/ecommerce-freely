@@ -33,7 +33,6 @@ const submitData = async (formData: IFormInput) => {
 };
 
 export default function AddProduct() {
-  console.log(API_URL, " aPI UR");
   const [isSubmitting, setIsSubmition] = useState(false);
   const [success, setSuccess] = useState(false);
   const formSubmitted = useRef<boolean>(false);
@@ -55,7 +54,7 @@ export default function AddProduct() {
     setIsSubmition(true);
     formSubmitted.current = true;
     const formResult = await submitData(data);
-    console.log(formResult);
+
     if (formResult) {
       setSuccess(true);
     } else {

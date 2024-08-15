@@ -17,20 +17,6 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
 
     const fieldRequierd = error?.type === "required" || error?.type === "min";
     const errorClasses = fieldRequierd ? "border-red-500" : "";
-    const InputTag = (props: InputProps) => {
-      if (as === "input") {
-        return <input {...props} ref={ref as Ref<HTMLInputElement>} />;
-      }
-
-      return (
-        <textarea
-          {...restProps}
-          ref={ref as Ref<HTMLTextAreaElement>}
-          className={`${errorClasses} ${asClasses} h-10 w-full border-2 border-gray-300 bg-white px-6 pr-10 text-gray-800 data-[disabled]:bg-gray-100`}
-          onChange={onChange}
-        />
-      );
-    };
 
     const asClasses = as === "textarea" ? "min-h-[120px]" : "";
 
@@ -39,8 +25,8 @@ const Input = forwardRef<HTMLInputElement | HTMLTextAreaElement, InputProps>(
         <Label className={fieldRequierd ? `text-red-500` : `text-gray-800`}>
           {label}
         </Label>
-        <InputTag
-          label={label}
+        <input
+          ref={ref as unknown as Ref<HTMLInputElement>}
           {...restProps}
           className={`${errorClasses} ${asClasses} h-10 w-full border-2 border-gray-300 bg-white px-6 pr-10 text-gray-800 data-[disabled]:bg-gray-100`}
           onChange={onChange}

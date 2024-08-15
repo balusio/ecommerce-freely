@@ -57,3 +57,12 @@ if you want to run independently the client go to the client folder and install 
 
 to run dev server :
 `npm run dev`
+
+The application is build with:
+
+- TailwindCss
+- React
+- React Router DOM v6 [check page](https://reactrouter.com/en/main)
+- HeadlessUI/react
+- heroIcons/react
+- vite
