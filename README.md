@@ -34,10 +34,15 @@ if everything goes OK you will receive a message like this:
 ## Server Initialize:
 
 `cd server && npm install`
-
 for dev mode the server runs on nodemoon, allowing hot reload
 
 _NOTE_ : running the server with nodemoon will make the cache to flush everytime you save a file, if you want to keep persitency of the node-cache layer run start mode without hot reload
+
+### seed DB
+
+theres a command line argument for the express server that will call fake api to get predefault products you must invoke passing the argument `seedDB`, example:
+
+`npm run dev seedDB`
 
 ### Prod Mode:
 
